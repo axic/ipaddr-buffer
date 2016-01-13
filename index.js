@@ -1,10 +1,6 @@
 var ipaddr = require('ipaddr.js')
 var assert = require('assert')
 
-ipaddr.fromBuffer = function (data, endian) {
-  return this.fromArray(data, endian)
-}
-
 ipaddr.fromArray = function (data, endian) {
   assert(data.length === 4 || data.length === 16)
   if (endian === 'le') {
@@ -12,6 +8,8 @@ ipaddr.fromArray = function (data, endian) {
   }
   return this.fromByteArray(data)
 }
+
+ipaddr.fromBuffer = ipaddr.fromArray
 
 ipaddr.tryParse = function (data, endian) {
   var type = typeof (data)
