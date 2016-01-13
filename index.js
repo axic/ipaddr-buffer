@@ -10,7 +10,7 @@ ipaddr.fromArray = function (data, endian) {
   if (endian === 'le') {
     data = data.slice(0).reverse()
   }
-  return this.parseBytes(data)
+  return this.fromByteArray(data)
 }
 
 ipaddr.tryParse = function (data, endian) {
@@ -22,6 +22,11 @@ ipaddr.tryParse = function (data, endian) {
     assert(endian === undefined)
     return this.parse(data)
   } else {
+    // handle special case of eight 16-bit parts for IPv6
+    if (data.length == 8) {
+      assert(endian === undefined)
+      return new this.IPv6(data)
+    }
     return this.fromArray(data, endian)
   }
 }
@@ -68,14 +73,12 @@ ipaddr.IPv6.prototype.toBuffer = function (endian) {
   return new Buffer(this.toArray(endian))
 }
 
-// Should be merged soon: https://github.com/whitequark/ipaddr.js/pull/34
-if (ipaddr.parseBytes === undefined) {
-  ipaddr.parseBytes = function (bytes) {
+// This is merged into upstream, but not released yet
+if (ipaddr.fromByteArray === undefined) {
+  ipaddr.fromByteArray = function (bytes) {
     var length = bytes.length
     if (length === 4) {
       return new ipaddr.IPv4(bytes)
-    } else if (length === 8) {
-      return new ipaddr.IPv6(bytes)
     } else if (length === 16) {
       var tmp = []
       for (var i = 0; i <= 14; i += 2) {

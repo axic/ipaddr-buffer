@@ -129,4 +129,7 @@ describe('.tryParse()', function () {
   it('should accept IPv6 array', function () {
     assert.equal(ipaddr.tryParse([ 0x20, 1, 0, 0x42, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ]).toString(), '2001:42:1::1')
   })
+  it('should accept IPv6 array', function () {
+    assert.equal(ipaddr.tryParse([ 0x2001, 0x42, 1, 0, 0, 0, 0, 1 ]).toString(), '2001:42:1::1')
+  })
 })
