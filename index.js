@@ -46,10 +46,9 @@ ipaddr.IPv4.prototype.toNumber = function () {
 
 ipaddr.IPv4.prototype.toArray = function (endian) {
   if (endian === 'le') {
-    // NOTE: Array.reverse is in-place apparently
-    return this.octets.slice(0).reverse()
+    return this.toByteArray().reverse()
   } else {
-    return this.octets
+    return this.toByteArray()
   }
 }
 
