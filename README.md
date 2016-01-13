@@ -10,8 +10,8 @@ the following methods:
 - `<addr>.toBuffer()`
 - `fromArray(data, [endianness])`
 - `<addr>.toArray()`
-- `fromNumber(number)`
-- `<addr>.toNumber()`
+- `fromNumber(number)` [IPv4 only]
+- `<addr>.toNumber()` [IPv4 only]
 - `tryParse(data, [endianness])`
 
 All `Array` and `Buffer` methods accept an optional endianness parameter, either
@@ -27,7 +27,6 @@ Examples:
 var ipaddr = require('ipaddr-buffer')
 
 // return an ipaddr object
-ipaddr.parse() // tried to parse in various ways
 ipaddr.fromArray([0x7f, 0, 0, 1]) // defaults to 'be' (MSB, network byteorder)
 ipaddr.fromArray([1, 0, 0, 0x7f], 'le')
 ipaddr.fromBuffer(new Buffer('7f000001', 'hex'))
