@@ -112,3 +112,21 @@ describe('.fromBuffer()', function () {
     assert.equal(ipaddr.fromBuffer(new Buffer([ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0x42, 0, 1, 0x20 ]), 'le').toString(), '2001:42:1::1')
   })
 })
+
+describe('.tryParse()', function () {
+  it('should accept number', function () {
+    assert.equal(ipaddr.tryParse(0x7f000001).toString(), '127.0.0.1')
+  })
+  it('should accept IPv4 string', function () {
+    assert.equal(ipaddr.tryParse('127.0.0.1').toString(), '127.0.0.1')
+  })
+  it('should accept IPv6 string', function () {
+    assert.equal(ipaddr.tryParse('2001:42:1::1').toString(), '2001:42:1::1')
+  })
+  it('should accept IPv4 array', function () {
+    assert.equal(ipaddr.tryParse([ 0x7f, 0, 0, 1 ]).toString(), '127.0.0.1')
+  })
+  it('should accept IPv6 array', function () {
+    assert.equal(ipaddr.tryParse([ 0x20, 1, 0, 0x42, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ]).toString(), '2001:42:1::1')
+  })
+})

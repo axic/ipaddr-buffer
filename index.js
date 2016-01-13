@@ -13,6 +13,19 @@ ipaddr.fromArray = function (data, endian) {
   return this.parseBytes(data)
 }
 
+ipaddr.tryParse = function (data, endian) {
+  var type = typeof (data)
+  if (type === 'number') {
+    assert(endian === undefined)
+    return this.fromNumber(data)
+  } else if (type === 'string') {
+    assert(endian === undefined)
+    return this.parse(data)
+  } else {
+    return this.fromArray(data, endian)
+  }
+}
+
 ipaddr.fromNumber = function (num) {
   assert(num >= 0 && num <= 0xffffffff)
   // always in 'be'

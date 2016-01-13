@@ -12,9 +12,14 @@ the following methods:
 - `<addr>.toArray()`
 - `fromNumber(number)`
 - `<addr>.toNumber()`
+- `tryParse(data, [endianness])`
 
 All `Array` and `Buffer` methods accept an optional endianness parameter, either
 `be` (MSB, default, also called *network byte order*) or `le` (LSB).
+
+The `tryParse` method is a bit trickier as it will try to decide what is the input and
+parse appropriately. It should support input in the format of `Number`, `String`,
+`Array` and `Buffer`. It defaults to considering the input an Array-compatible type.
 
 Examples:
 
@@ -27,4 +32,6 @@ ipaddr.fromArray([0x7f, 0, 0, 1]) // defaults to 'be' (MSB, network byteorder)
 ipaddr.fromArray([1, 0, 0, 0x7f], 'le')
 ipaddr.fromBuffer(new Buffer('7f000001', 'hex'))
 ipaddr.fromNumber(0x7f000001)
+ipaddr.tryParse('127.0.0.1')
+ipaddr.tryParse(0x7f000001)
 ```
