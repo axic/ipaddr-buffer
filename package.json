@@ -1,8 +1,12 @@
 {
   "name": "ipaddr-buffer",
   "description": "A tiny shim over ipaddr.js providing convenience features for Node.js",
-  "version": "0.1.0",
-  "keywords": ["ip", "ipv4", "ipv6"],
+  "version": "0.2.0",
+  "keywords": [
+    "ip",
+    "ipv4",
+    "ipv6"
+  ],
   "license": "MIT",
   "author": "Alex Beregszaszi <alex@rtfs.hu>",
   "main": "index.js",
